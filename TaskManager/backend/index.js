@@ -105,6 +105,22 @@ app.post('/create_task', async (req, res) => {
  }
  })
 
+ app.get('/create_task-here', async (req, res) => {
+  const {email, password} = req.body
+  const user =  await Student.findOne({email})
+ 
+  const validated = await bcrypt.compare(password, user.password);
+ if(email == user.email && validated){
+ 
+   console.log("Logged in Successfully")
+   res.send({message:'Logged in Successfully', user : user})
+ }else{
+   console.log("Wrong Credentialhhrh  rhekjdkj renarra aakjafjrjf jajrjfaf akjafjnarkjewjkw akjafnrakf wranmarkrarafe kjafafo fknfnaf jkanfnj s!")
+   return res.status(400).json({error:'Wrong Credentials!'})
+ 
+ }
+ })
+
 
 app.get('/', function (req, res) {
   res.send('Hello World')
